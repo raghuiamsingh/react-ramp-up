@@ -5,6 +5,7 @@ import {apiFetch} from './ApiFetch';
 import * as Constants from './Constants';
 import Loader from './Loader';
 import history from '../history';
+import * as Cookie from './Cookie';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -33,7 +34,7 @@ class LoginForm extends React.Component {
             loading: true
         });
 
-        window.sessionStorage.removeItem(Constants.sessionKeyName);
+        Cookie.eraseCookie(Constants.sessionKeyName);
 
         apiFetch('people').then(function(jsonResponse) {
             let credentialsVerified = false;
@@ -46,9 +47,10 @@ class LoginForm extends React.Component {
             }
             if (credentialsVerified) {
                 currentErrors.wrongCredentials = false;
-                window.sessionStorage.setItem(
+                Cookie.setCookie(
                     Constants.sessionKeyName,
-                    JSON.stringify(jsonResponse['results'][index])
+                    JSON.stringify(jsonResponse['results'][index]),
+                    Constants.defaultCookieLifetime
                 );
             } else {
                 currentErrors.wrongCredentials = true;

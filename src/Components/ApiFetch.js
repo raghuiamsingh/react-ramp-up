@@ -6,7 +6,7 @@ export function apiFetch(fetchParam, fullUrl = false, id = false) {
     let apiUrl;
 
     if (fullUrl) {
-        apiUrl = fullUrl;
+        apiUrl = fetchParam;
     } else {
         switch (fetchParam) {
             case 'people': {
@@ -21,20 +21,14 @@ export function apiFetch(fetchParam, fullUrl = false, id = false) {
                 fetchItem = Constants.apiPlanets;
             }
         }
-        apiUrl = Constants.apiBaseUrl + fetchItem;
-        apiUrl += id ? ('/' + id) : '';
-        apiUrl += Constants.apiFormat; 
+        apiUrl = Constants.apiBaseUrl + fetchItem + '/';
+        apiUrl += id ? (id + '/') : '';
+        apiUrl += Constants.apiFormat;
     }
 
     return fetch(apiUrl, {
         method: Constants.fetchMethod,
-        cache: Constants.apiNoCache,
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8"
-        },
-        redirect: "follow",
-        referrer: "no-referrer"
+        cache: Constants.apiNoCache
     })
     .then(response => response.json())
     .catch(error => console.error('Error in API:', error));

@@ -6,10 +6,11 @@ import Icon from '../Components/Icon';
 import * as Constants from '../Components/Constants';
 import { Redirect } from 'react-router-dom';
 import user_logo from '../Components/login_icon.svg';
+import * as Cookie from '../Components/Cookie';
 
 class LoginPage extends Component {
   render() {
-    if (window.sessionStorage.getItem(Constants.sessionKeyName) !== null) {
+    if (Cookie.getCookie(Constants.sessionKeyName) !== null) {
       return <Redirect to="/planets" />;
     }
 

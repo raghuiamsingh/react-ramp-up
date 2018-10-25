@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import LogoutButton from '../Components/LogoutButton';
 import history from '../history';
 import Loader from '../Components/Loader';
+import * as Cookie from '../Components/Cookie';
 
 class Planet extends React.Component {
     constructor(props) {
@@ -19,11 +20,11 @@ class Planet extends React.Component {
     }
 
     handleLogout() {
-        window.sessionStorage.removeItem(Constants.sessionKeyName);
+        Cookie.eraseCookie(Constants.sessionKeyName);
         history.push('/');
     }
 
-    componentWillMount() {
+    componentDidMount() {
         var planet_id = this.props.match.params.id;
         let planetData = [];
         apiFetch('planets', false, planet_id).then(function(jsonResponse) {
@@ -44,7 +45,7 @@ class Planet extends React.Component {
             }
         );
         return string;
-    }    
+    }
 
     renderPlanetDetails(planet) {
         let planetDet = [];
@@ -63,7 +64,7 @@ class Planet extends React.Component {
     }
 
     render() {
-        if (window.sessionStorage.getItem(Constants.sessionKeyName) === null) {
+        if (Cookie.getCookie(Constants.sessionKeyName) === null) {
             return <Redirect to="/" />;
         }
 

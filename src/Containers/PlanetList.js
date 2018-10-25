@@ -7,6 +7,7 @@ import Loader from '../Components/Loader';
 import { Redirect, Link } from 'react-router-dom';
 import FormInput from '../Components/InputField';
 import history from '../history';
+import * as Cookie from '../Components/Cookie';
 
 class PlanetList extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class PlanetList extends React.Component {
   }
 
   handleLogout() {
-    window.sessionStorage.removeItem(Constants.sessionKeyName);
+    Cookie.eraseCookie(Constants.sessionKeyName);
     history.push('/');
   }
 
@@ -75,7 +76,7 @@ class PlanetList extends React.Component {
   }
 
   render() {
-    if (window.sessionStorage.getItem(Constants.sessionKeyName) === null) {
+    if (Cookie.getCookie(Constants.sessionKeyName) === null) {
       return <Redirect to="/" />;
     }
 
