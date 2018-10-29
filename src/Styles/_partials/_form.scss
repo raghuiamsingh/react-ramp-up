@@ -1,0 +1,60 @@
+.formContent {
+	border-radius: 10px 10px 10px 10px;
+	background: $white;
+	padding: 30px;
+	width: 90%;
+	max-width: 450px;
+	position: relative;
+	padding: 0;
+	box-shadow: 0 30px 60px 0 $black_30;
+	text-align: center;
+}
+
+input[type=button] {
+	@extend %extend_1;
+	&:hover {
+		background-color: $color_picton_blue_approx;
+	}
+	&:active {
+		transform: scale(0.95);
+	}
+}
+input[type=submit] {
+	@extend %extend_1;
+	&:hover {
+		background-color: $color_picton_blue_approx;
+		cursor: pointer;
+	}
+	&:active {
+		transform: scale(0.95);
+	}
+}
+input[type=reset] {
+	@extend %extend_1;
+	&:hover {
+		background-color: $color_picton_blue_approx;
+	}
+	&:active {
+		transform: scale(0.95);
+	}
+}
+input[type=text] {
+	@extend %extend_2;
+	&:focus {
+		background-color: $white;
+		border-bottom: 2px solid $color_viking_approx;
+	}
+	&:placeholder {
+		color: $color_celeste_approx;
+	}
+}
+input[type=password] {
+	@extend %extend_2;
+	&:focus {
+		background-color: $white;
+		border-bottom: 2px solid $color_viking_approx;
+	}
+	&:placeholder {
+		color: $color_celeste_approx;
+	}
+}

@@ -1,0 +1,58 @@
+.error-item {
+	font-size: 13px;
+	color: $red;
+}
+.details-key {
+	color: $color_plantation_approx;
+	font-weight: bold;
+}
+.planet-details {
+	padding-bottom: 10px;
+}
+.planet-list {
+	padding-left: 0;
+	.planet-item {
+		list-style: none;
+		margin: 0 10px 10px;
+		border-radius: 4px;
+		padding: 5px 0;
+	}
+}
+.logout-button-holder {
+	width: 100%;
+	display: inline-block;
+	.logout-button {
+		background-color: $color_roman_approx;
+		padding: 10px 20px;
+		cursor: pointer;
+		margin: 0;
+		&:hover {
+			background-color: $color_chestnut_approx;
+		}
+	}
+	a {
+		color: $white;
+	}
+}
+.left-float {
+	float: left;
+}
+.right-float {
+	float: right;
+}
+.app-loader {
+	margin: 0 auto;
+}
+.login-form {
+    .errorField {
+        background-color: $white;
+        border-bottom: 2px solid $color_roman_approx;
+    }
+}
+.planet-item {
+	a {
+		font-weight: bold;
+		color: $white;
+		// mix-blend-mode: difference;
+	}
+}
