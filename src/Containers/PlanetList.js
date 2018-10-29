@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Constants from '../Components/Constants';
 import {apiFetch} from '../Components/ApiFetch';
-import FormHeader from '../Components/FormHeader';
+import FormHeader from '../Components/FormHeader/FormHeader';
 import LogoutButton from '../Components/LogoutButton';
 import Loader from '../Components/Loader';
 import { Redirect, Link } from 'react-router-dom';
@@ -45,7 +45,7 @@ class PlanetList extends React.Component {
           population: jsonResponse['results'][index]['population']
         });
       }
-    }).then(data => this.setState({
+    }).then(() => this.setState({
       planets: planetsList,
       loading: false
     }));
@@ -63,7 +63,7 @@ class PlanetList extends React.Component {
       } else if (intensity < 0) {
         intensity = 0;
       }
-      intensity = intensity + "%";
+      intensity = (100 - intensity) + "%";
     } else {
       hue = "195";
       intensity = "50%";
@@ -108,7 +108,7 @@ class PlanetList extends React.Component {
             {this.state.planets.map(planet => {
               var lowerName = planet.name.toLowerCase();
               if (lowerName.indexOf(searchTerm) === -1) {
-                return;
+                return '';
               }
               return (
                 <li className="planet-item" style={this.getPopulationColor(planet.population)} key={planet.id}>

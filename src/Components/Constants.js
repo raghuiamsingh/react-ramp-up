@@ -12,3 +12,7 @@ export const apiNoCache = "no-cache";
 export const sessionKeyName = "swapi_user";
 
 export const defaultCookieLifetime = 7;
+
+export const footerLinks = {
+    0: {classes: "underlineHover", link: "#", title: "Forgot Password?"}
+};

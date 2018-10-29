@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LoginForm from '../Components/LoginForm';
-import FormHeader from '../Components/FormHeader';
+import FormHeader from '../Components/FormHeader/FormHeader';
 import FormFooter from '../Components/FormFooter';
 import Icon from '../Components/Icon';
 import * as Constants from '../Components/Constants';
@@ -8,15 +8,11 @@ import { Redirect } from 'react-router-dom';
 import user_logo from '../Components/login_icon.svg';
 import * as Cookie from '../Components/Cookie';
 
-class LoginPage extends Component {
+class LoginPage extends React.Component {
   render() {
     if (Cookie.getCookie(Constants.sessionKeyName) !== null) {
       return <Redirect to="/planets" />;
     }
-
-    let footerLinks = {
-      0: {classes: "underlineHover", link: "#", title: "Forgot Password?"}
-    };
 
     return (
       <div className="wrapper fadeInDown">
@@ -26,7 +22,7 @@ class LoginPage extends Component {
 
           <LoginForm />
 
-          <FormFooter contents={footerLinks} />
+          <FormFooter />
         </div>
       </div>
     );

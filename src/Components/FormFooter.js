@@ -1,29 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
+import * as Constants from './Constants';
+import { withStyles } from '@material-ui/core/styles';
 
-class FormFooter extends React.Component {
-    createFooterLinks(links) {
-        let footerLinks = [];
-        for (let key in links) {
-            footerLinks.push(
-                <a 
-                    className={links[key].classes}
-                    href={links[key].link}
-                    key={key}
-                >
-                    {links[key].title}
-                </a>
-            );
-        }
-        return footerLinks;
+const styles = {
+    formFooter: {
+        backgroundColor: '#f6f6f6',
+        borderTop: '1px solid #b6b8b9',
+        padding: 25,
+        textAlign: 'center',
+        borderRadius: '0 0 10px 10px'
     }
+};
 
-    render() {
-        return (
-            <div className="formFooter">
-                {this.createFooterLinks(this.props.contents)}
-            </div>
+function createFooterLinks(links) {
+    let footerLinks = [];
+    for (let key in links) {
+        footerLinks.push(
+            <a
+                className={links[key].classes}
+                href={links[key].link}
+                key={key}
+            >
+                {links[key].title}
+            </a>
         );
     }
+    return footerLinks;
 }
 
-export default FormFooter;
+function FormFooter(props) {
+    const { classes } = props;
+
+    return (
+        <div className={classes.formFooter}>
+            {createFooterLinks(Constants.footerLinks)}
+        </div>
+    );
+}
+
+export default withStyles(styles)(FormFooter);

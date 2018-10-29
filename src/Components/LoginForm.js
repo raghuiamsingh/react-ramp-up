@@ -20,13 +20,13 @@ class LoginForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const formData = new FormData(event.target);
+        let formData = event.target.elements;
         var currentErrors = this.state.errors.slice();
-        if (!formData.get('name')) {
+        if (!formData.name.value) {
             currentErrors.nameError = true;
         }
 
-        if (!formData.get('birth_year')) {
+        if (!formData.birth_year.value) {
             currentErrors.birthError = true;
         }
 
@@ -39,8 +39,8 @@ class LoginForm extends React.Component {
         apiFetch('people').then(function(jsonResponse) {
             let credentialsVerified = false;
             for (var index in jsonResponse['results']) {
-                if (jsonResponse['results'][index]['name'] == formData.get('name') 
-                    && jsonResponse['results'][index]['birth_year'] == formData.get('birth_year')) {
+                if (jsonResponse['results'][index]['name'] === formData.name.value
+                    && jsonResponse['results'][index]['birth_year'] === formData.birth_year.value) {
                     credentialsVerified = true;
                     break;
                 }
@@ -55,7 +55,7 @@ class LoginForm extends React.Component {
             } else {
                 currentErrors.wrongCredentials = true;
             }
-        }).then(data => {
+        }).then(() => {
             this.setState({
                 errors: currentErrors,
                 loading: false

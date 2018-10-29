@@ -1,0 +1,79 @@
+html {
+	background-color: $color_picton_blue_approx;
+}
+
+@font-face {
+	font-family: 'OpenSansRegular';
+	src: url('/fonts/opensans-regular-webfont.woff') 
+}
+
+// body * {
+// 	font-family: 'OpenSansRegular';
+// }
+
+body {
+	font-family: $font_0, $font_1;
+	height: 100vh;
+}
+
+
+a {
+	color: $color_jordy_blue_approx;
+	display: inline-block;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+h2 {
+	&.inactive {
+		color: $color_celeste_approx;
+	}
+	&.active {
+		color: $color_woodsmoke_approx;
+		border-bottom: 2px solid $color_viking_approx;
+	}
+}
+
+.wrapper {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	min-height: 100%;
+	padding: 20px;
+}
+
+.fadeInDown {
+	animation-name: fadeInDown;
+	animation-duration: 1s;
+	animation-fill-mode: both;
+}
+
+.underlineHover {
+	&:after {
+		display: block;
+		left: 0;
+		bottom: -10px;
+		width: 0;
+		height: 2px;
+		background-color: $color_picton_blue_approx;
+		content: "";
+		transition: width 0.2s;
+	}
+	&:hover {
+		color: $color_woodsmoke_approx;
+		&:after {
+			width: 100%;
+		}
+	}
+}
+.icon {
+	width: 60%;
+}
+* {
+	box-sizing: border-box;
+	&:focus {
+		outline: none;
+	}
+}

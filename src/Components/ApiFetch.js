@@ -1,3 +1,5 @@
+/* global fetch:false */
+/* global alert:false */
 import * as Constants from './Constants';
 
 export function apiFetch(fetchParam, fullUrl = false, id = false) {
@@ -31,5 +33,5 @@ export function apiFetch(fetchParam, fullUrl = false, id = false) {
         cache: Constants.apiNoCache
     })
     .then(response => response.json())
-    .catch(error => console.error('Error in API:', error));
+    .catch(error => alert('Error in API:', error));
 }

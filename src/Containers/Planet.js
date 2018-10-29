@@ -1,5 +1,5 @@
 import React from 'react';
-import FormHeader from '../Components/FormHeader';
+import FormHeader from '../Components/FormHeader/FormHeader';
 import {apiFetch} from '../Components/ApiFetch';
 import * as Constants from '../Components/Constants';
 import { Redirect } from 'react-router-dom';
@@ -7,15 +7,16 @@ import LogoutButton from '../Components/LogoutButton';
 import history from '../history';
 import Loader from '../Components/Loader';
 import * as Cookie from '../Components/Cookie';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import * as PlanetActionCreators from '../actions';
 
 class Planet extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            planet: {},
-            loading: true
-        };
+        const { dispatch } = props;
+        this.boundActionCreators = bindActionCreators(PlanetActionCreators, dispatch);
         this.handleLogout = this.handleLogout.bind(this);
     }
 
@@ -25,14 +26,15 @@ class Planet extends React.Component {
     }
 
     componentDidMount() {
+        let { dispatch } = this.props;
         var planet_id = this.props.match.params.id;
         let planetData = [];
         apiFetch('planets', false, planet_id).then(function(jsonResponse) {
             planetData = jsonResponse;
-        }).then(data => this.setState({ 
-            planet: planetData,
-            loading: false
-        }));
+        }).then(() => {
+            let action = PlanetActionCreators.setPlanetData(planetData);
+            dispatch(action);
+        });
     }
 
     normalizePlanetKey(string) {
@@ -71,7 +73,7 @@ class Planet extends React.Component {
         var planet_id = this.props.match.params.id;
 
         let content;
-        if (this.state.loading) {
+        if (this.props.loading) {
             content = <Loader />;
         } else {
             content = <div className="wrapper fadeInDown">
@@ -85,7 +87,7 @@ class Planet extends React.Component {
                 />
                 <div className="formContent">
                     <FormHeader classes="active" headerText={"Planet Details (ID: "+planet_id+")"} />
-                    {this.renderPlanetDetails(this.state.planet)}
+                    {this.renderPlanetDetails(this.props.planet)}
                 </div>
             </div>;
         }
@@ -93,7 +95,11 @@ class Planet extends React.Component {
         return (
             content
         );
-    };
+    }
 }
 
-export default Planet;
+function mapState(state) {
+    return state;
+}
+
+export default connect(mapState)(Planet);
